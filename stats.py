@@ -5,9 +5,7 @@ from models import *
 @app.route("/stats", methods=['GET'])
 def show_stats():
 
-    name = "DJ OLJI"
-    name = name.upper()
-    uid = Users.select(Users.userID).where(Users.djname == name).get()
+    user = Users.select().limit(1).get()
 
     lvlgrades = {}
     lvlgrades['labels'] = []
@@ -32,7 +30,7 @@ def show_stats():
     gradepercent = {'NP':0, 'F':0, 'E':0, 'D':0, 'C':0, 'B':0, 'A':0, 'AA':0, 'AAA':0}
     nLamps = 0
     nGrades = 0
-    for play in ChartStats.select(Charts.level, ChartStats.lamp, fn.Count(ChartStats.lamp)).join(Charts).group_by(ChartStats.lamp, Charts.level).where(ChartStats.user==uid, ChartStats.playtype == "P1").dicts():
+    for play in ChartStats.select(Charts.level, ChartStats.lamp, fn.Count(ChartStats.lamp)).join(Charts).group_by(ChartStats.lamp, Charts.level).where(ChartStats.user==user.userID, ChartStats.playtype == "P1").dicts():
         if play['level'] not in lampinfo:
             lampinfo[play['level']] = {}
             totalLampPerLevel[play['level']] = 0
@@ -43,7 +41,7 @@ def show_stats():
             totalLampPerLevel_op[play['level']] = totalLampPerLevel[play['level']] + play['lamp")']
         totalLampPerLevel[play['level']] = totalLampPerLevel[play['level']] + play['lamp")']
         nLamps += play['lamp")']
-    for play in ChartStats.select(Charts.level, ChartStats.grade, fn.Count(ChartStats.grade)).join(Charts).group_by(ChartStats.grade, Charts.level).where(ChartStats.user==uid, ChartStats.playtype == "P1").dicts():
+    for play in ChartStats.select(Charts.level, ChartStats.grade, fn.Count(ChartStats.grade)).join(Charts).group_by(ChartStats.grade, Charts.level).where(ChartStats.user==user.userID, ChartStats.playtype == "P1").dicts():
         if play['level'] not in gradeinfo:
             gradeinfo[play['level']] = {}
             totalGradePerLevel[play['level']] = 0
