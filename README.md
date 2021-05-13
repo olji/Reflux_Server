@@ -1,5 +1,5 @@
 # Reflux_Server
-Server side for remote saving through Reflux
+Server side for remote saving through [Reflux](https://github.com/olji/Reflux)
 
 Have some livestreaming and statistics utilities.
 
