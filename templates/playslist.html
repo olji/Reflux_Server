@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Plays</title>
+    </head>
+    <body>
+        {% include "header.html" %}
+        <div id="body">
+            <table style="text-align:justify">
+                <tr>
+                    <th colspan="5" style="text-align:center">Plays</th>
+                </tr>
+                <tr>
+                    <th>User</th>
+                    <th>Chart</th>
+                    <th>EX Score</th>
+                    <th>Clear</th>
+                    <th>DJ Level</th>
+                </tr>
+        {% for item in plays %}
+            <tr>
+                <td><a href="/plays?playid={{item.0}}">{{item.1}}</a></td>
+                <td><a href="/plays?playid={{item.0}}">{{item.2}} {{item.3}}</a></td>
+                <td><a href="/plays?playid={{item.0}}">{{item.4}}</a></td>
+                <td><a href="/plays?playid={{item.0}}">{{item.5}}</a></td>
+                <td><a href="/plays?playid={{item.0}}">{{item.6}}</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+        {% include "footer.html" %}
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_alert.css') }}">
+        <script type="text/javascript" charset="utf-8">
+            function snipEntries(){
+                var body = document.getElementById("body");
+                var nodes = document.querySelectorAll('.playentry');
+                var totalHeight = 0;
+                nodes.forEach(node => { totalHeight += node.offsetHeight;});
+                if(totalHeight > document.documentElement.clientHeight){
+                    body.lastChild.remove();
+                }
+            }
+
+            function getTextWidth(text, font){
+                canvas = document.createElement("canvas");
+                context = canvas.getContext("2d");
+                context.font = font;
+                width = context.measureText(text).width;
+                return width;
+            }
+            const getFontSize = (text, pxSize) => {
+                var width = getTextWidth(text, pxSize+"px verdana");
+                formattedWidth = Math.ceil(width) + "px";
+                while(width > document.documentElement.clientWidth){
+                    pxSize--;
+                    width = getTextWidth(text, pxSize+"px verdana");
+                }
+                      return `${pxSize}px`
+                }
+
+            var socket = io();
+            socket.on('connect', function() {
+                    socket.emit('cevent', {data: 'Hello world'});
+                    });
+
+            socket.on('newplay', function(msg) {
+                    var newsong = document.createElement("div");
+                    var fontsize = getFontSize(msg['title'], msg['defaultFontSize']);
+                    newsong.className = "playentry";
+                    newsong.innerHTML = '<b style="font-size:'+fontsize+'">'+msg['title']+'</b><br/><div><div class="'+msg['lampclass']+'" style="background: url(\'static/playinfo/penel_lamp_'+msg['lamp']+'.png\'"></div>'+
+                    '<progress class="djlevelbar '+msg['divclass']+'" max="297" value="'+msg['fillpercentage']+'"></progress><img src="static/playinfo/penel_end.png" class="djlevelbar" >';
+                    body.insertBefore(newsong, body.childNodes[0]);
+                    snipEntries();
+
+                    });
+        </script>
+    </head>
+    <body style="background: transparent;">
+        <div id="body"></div>
+    </body>
+</html>

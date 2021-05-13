@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ name }}'s data</title>
+    </head>
+    <body style="text-align: center;">
+        {% include "header.html" %}
+        <div id="body">
+            <h1>{{ name }}</h1>
+            <a href="/justplayed">Live play history</a>
+        </div>
+        <p>Latest Plays</p>
+	<table width="50%">
+		<tr>
+			<th>Title</th>
+			<th>Difficulty</th>
+			<th>Grade</th>
+			<th>Lamp</th>
+			<th>Score</th>
+		</tr>
+		{% for play in plays %}
+		<tr>
+			<td><a href="/songs?songid={{play.iidx_id}}">{{play.title}}</a></td>
+			<td><a href="/songs?songid={{play.iidx_id}}">{{play.difficulty}}</a></td>
+			<td><a href="/songs?songid={{play.iidx_id}}">{{play.grade}}</a></td>
+			<td><a href="/songs?songid={{play.iidx_id}}">{{play.lamp}}</a></td>
+			<td><a href="/songs?songid={{play.iidx_id}}">{{play.ex_score}}</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+        {% include "footer.html" %}
+    </body>
+</html>

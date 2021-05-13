@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Song Data - {{title}}</title>
+    </head>
+    <body>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_alert.css') }}">
+        {% include "header.html" %}
+        <h2>{{songdata.genre}}</h2>
+        <h1>{{songdata.title}}</h1>
+        <h2>({{songdata.title2}})</h2>
+        <h2>{{songdata.artist}}</h2>
+        <h3>{{songdata.bpm}} BPM</h3>
+	<p/>
+        <div style="text-align: center">
+            <table width="50%" style='display:inline'>
+                <tr>
+                    <th>Player</th>
+                    <th>Difficulty</th>
+                    <th>Playgraph</th>
+                    <th>Ex score</th>
+                    <th></th>
+                </tr>
+                {% for item in plays %}
+                <tr>
+                    <td>{{ item.name }}</td>
+		    <td>{{item.diff}}</td>
+		    <td><div><div class='{{item.lampclass}}' style="background: url('static/playinfo/penel_lamp_{{item.lamp}}.png'"></div><progress class="djlevelbar {{item.divclass}}" max="297" value="{{item.fillpercentage}}"></progress><img src="static/playinfo/penel_end.png" class="djlevelbar" ></td>
+            <td>{{ item.exscore }}</td>
+            </tr>
+{% endfor %}
+            </table>
+        </div>
+	<p/>
+        {% include "footer.html" %}
+   </body>
+</html>

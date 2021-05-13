@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Users</title>
+    </head>
+    <body>
+        {% include "header.html" %}
+        <div id="body">
+        <p>Userlist:</p>
+        <ul>
+        {% for item in users %}
+        <li><a href="/users?name={{item}}">{{item}}</a></li>
+        {% endfor %}
+        </ul>
+        </div>
+        {% include "footer.html" %}
+    </body>
+</html>

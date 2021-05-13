@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Index</title>
+	</head>
+	<body>
+		{% include "header.html" %}
+		<div style="text-align: center">
+			<h1> INDEX </h1>
+			<p>Singles Chart unlock progress: {{data.unlocked_sp}} / {{data.total_sp}} ({{data.hidden_sp}} charts from Music packs or subscriber songs locked)</p>
+			<p>Doubles Chart unlock progress: {{data.unlocked_dp}} / {{data.total_dp}} ({{data.hidden_dp}} charts from Music packs or subscriber songs locked)</p>
+			<p>Total bits for everything is {{data.bitcost}}</p>
+
+			<p/>
+			<a href="/farm?type=import">Imported but unplayed</a>
+			<a href="/farm?type=old">Not played in a while</a>
+			<p/>
+
+			<table width="50%" style='display:inline'>
+				<tr>
+					<th colspan="1">Grade farming</th>
+				</tr>
+				<tr>
+					<td><a href="/farm?type=grade&args=A">A</a></td>
+				</tr>
+				<tr>
+					<td><a href="/farm?type=grade&args=AA">AA</a></td>
+				</tr>
+				<tr>
+					<td><a href="/farm?type=grade&args=AAA">AAA</a></td>
+				</tr>
+				<tr>
+					<td><a href="/farm?type=grade&args=MAX">MAX</a></td>
+				</tr>
+			</table>
+			<p/>
+		</div>
+		{% include "footer.html" %}
+	</body>
+</html>

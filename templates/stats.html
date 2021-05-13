@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All the stats</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="static/scripts/usercharts.js"></script>
+        <script>
+            $(document).ready(function() {
+		    drawStats( {{ lamppercent|safe }} , {{ gradepercent|safe }}, {{ levellamppercent|safe }} , {{ levelgradepercent|safe }} , {{ levellamppercent_onlyplayed|safe }} , {{ levelgradepercent_onlyplayed|safe }} );
+            });
+        </script>
+    </head>
+    <body>
+        {% include "header.html" %}
+        <div id="body">
+            <h2>Percentage</h2>
+            <div class="chart-container" style="margin: 0 ; display:inline-block">
+                <canvas id="lvlgrades_percent" width="400px" height="300px"></canvas>
+            </div>
+            <div class="chart-container" style="margin: 0 auto; display:inline-block">
+                <canvas id="lvlclears_percent" width="400px" height="300px"></canvas>
+            </div>
+            <div class="chart-container" style="margin: 0 ; display:inline-block">
+                <canvas id="grades" width="400px" height="300px"></canvas>
+            </div>
+            <div class="chart-container" style="margin: 0 auto; display:inline-block">
+                <canvas id="clears" width="400px" height="300px"></canvas>
+            </div>
+	    <p/>
+            <h2>Percentage (Excluding unplayed)</h2>
+            <div class="chart-container" style="margin: 0 ; display:inline-block">
+                <canvas id="lvlgrades_percent_onlyplayed" width="400px" height="300px"></canvas>
+            </div>
+            <div class="chart-container" style="margin: 0 auto; display:inline-block">
+                <canvas id="lvlclears_percent_onlyplayed" width="400px" height="300px"></canvas>
+            </div>
+            <div class="chart-container" style="margin: 0 ; display:inline-block">
+                <canvas id="grades_onlyplayed" width="400px" height="300px"></canvas>
+            </div>
+            <div class="chart-container" style="margin: 0 auto; display:inline-block">
+                <canvas id="clears_onlyplayed" width="400px" height="300px"></canvas>
+            </div>
+        </div>
+        {% include "footer.html" %}
+    </body>
+</html>

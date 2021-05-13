@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Import results</title>
+    </head>
+    <body>
+        {% include "header.html" %}
+        <div id="body">
+        <h1>Results:</h1>
+        <p>{{ result.status }}
+        <ul>
+        {% for item in result.title %}
+        <li>"{{item}}"</li>
+        {% endfor %}
+        </ul>
+        </div>
+        {% include "footer.html" %}
+    </body>
+</html>

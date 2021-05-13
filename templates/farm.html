@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>{{ data.mode }} Farming candidates</title>
+	</head>
+	<body>
+		{% include "header.html" %}
+		<div id="body">
+			<p/>
+			<form>
+				{% for mode in types %}
+				<label for="{{ mode }}">{{ mode }}</label>
+				<input type="radio" name="type", id="{{mode}}">
+				{% endfor %}
+			<p/>
+			<p>{{data.count}} entries</p>
+			<p/>
+			<table>
+				<tr>
+					<th>Chart</th>
+					<th>{{data.data.0.criteria_label}}</th>
+				</tr>
+				{% for item in data.data %}
+				<tr>
+					<td><a href="/songs?songid={{item.songid}}">{{ item.title }} {{item.diff}} ({{item.level}})</a></td>
+					<td><a href="/songs?songid={{item.songid}}">{{item.criteria}}</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div>
+		{% include "footer.html" %}
+	</body>
+</html>

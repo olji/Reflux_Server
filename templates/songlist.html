@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Songs</title>
+	</head>
+	<body>
+		{% include "header.html" %}
+		<div id="body">
+			<p></p>
+			{% for key,group in songs.items() %}
+			<details>
+				<summary>{{key}}</summary>
+				<table width="50%">
+					<tr>
+						<th>Title</th>
+					</tr>
+					{% for item in group %}
+					<tr>
+						<td><a href="/songs?songid={{item.songid}}">{{item.title}}</a></td>
+					</tr>
+					{% endfor %}
+				</table>
+			</details>
+			<p/>
+			{% endfor %}
+		</div>
+		{% include "footer.html" %}
+	</body>
+</html>

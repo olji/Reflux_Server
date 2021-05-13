@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Play data</title>
+    </head>
+    <body>
+        {% include "header.html" %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_alert.css') }}">
+        <div id="body">
+            <p>Played by <a href="/users?name={{data.user}}">{{data.user}}</a> on {{data.date}} UTC</p>
+            <h2>{{data.genre}}</h2>
+            <h1>{{data.title}} {{data.diff}}</h1>
+            <h2>{{data.artist}}</h2>
+            <h3>{{data.bpm}} BPM</h3>
+
+            <hr>
+            <h2>{{data.lamp}}</h2>
+            {{data.pbar_grade_html}}
+            {{data.pbar_gauge_html}}
+            <p></p>
+            <table style="width:50%">
+                <tr>
+                    <th colspan="2">Judge Data</th>
+                </tr>
+                <tr>
+                    <td>PGreat</td>
+                    <td>{{data.pgreat}}</td>
+                </tr>
+                <tr>
+                    <td>Great</td>
+                    <td>{{data.great}}</td>
+                </tr>
+                <tr>
+                    <td>Good</td>
+                    <td>{{data.good}}</td>
+                </tr>
+                <tr>
+                    <td>Bad</td>
+                    <td>{{data.bad}}</td>
+                </tr>
+                <tr>
+                    <td>Poor</td>
+                    <td>{{data.poor}}</td>
+                </tr>
+                <tr>
+                    <td>Combo Break</td>
+                    <td>{{data.combobreak}}</td>
+                </tr>
+                <tr>
+                    <td>Fast</td>
+                    <td>{{data.fast}}</td>
+                </tr>
+                <tr>
+                    <td>Slow</td>
+                    <td>{{data.slow}}</td>
+                </tr>
+            </table>
+        </div>
+        {% include "footer.html" %}
+    </body>
+</html>

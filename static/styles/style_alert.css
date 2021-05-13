@@ -1,0 +1,387 @@
+body{
+    color: #eee;
+    text-align: center;
+    font: Verdana;
+    /* font-size: 30px; */
+    vertical-align:middle;
+}
+img{
+    vertical-align:middle;
+}
+
+/* {{{ Lamp animation */
+div.static{
+    height:42px;
+    width:28px;
+    vertical-align:middle;
+    background-size: cover;
+    display: inline-block;
+    vertical-align:middle;
+}
+div.anim_F{
+    height:42px;
+    width:28px;
+    background-size: cover;
+    animation: play2f .05s steps(2) infinite;
+    display: inline-block;
+    vertical-align:middle;
+}
+div.anim_EX{
+    height:42px;
+    width:28px;
+    background-size: cover;
+    animation: play2f .3s steps(2) infinite;
+    display: inline-block;
+    vertical-align:middle;
+}
+
+div.anim_FC{
+    height:42px;
+    width:28px;
+    background-size:cover;
+    animation: play3f .2s steps(3) infinite;
+    display: inline-block;
+    vertical-align:middle;
+}
+@keyframes play2f {
+    100% {background-position: -56px}
+}
+@keyframes play3f {
+    100% {background-position: -84px}
+}
+/* }}} */
+
+/* {{{ DJ Level progress bar styling */
+/* {{{ Basic styling */
+/* All HTML5 progress enabled browsers */
+progress.djlevelbar {
+    /* Turns off styling - not usually needed, but good to know. */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background-size: auto;
+    /* Align with lamp and end sections */
+    vertical-align:middle;
+    /* Dimensions */
+    width: 297px;
+    height: 42px;
+}
+/* Polyfill */
+progress.djlevelbar[role]:after {
+    background-image: none;
+}
+progress[role] strong {
+    display: none;
+}
+/* }}} */
+/* {{{ Empty background */
+/*
+ * Background of the progress bar background
+ */
+/* Firefox and Polyfill */ /* !important only needed in polyfill */
+progress.djlevelbar {
+    background: url("../playinfo/graph_empty.png") !important; /* !important only needed in polyfill */
+    background-size: 297px 42px;
+}
+/* Chrome */
+progress.djlevelbar::-webkit-progress-bar {
+    background: url("../playinfo/graph_empty.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* }}} */
+/* {{{ Filled background */
+/* {{{ bcdef */
+/* Firefox */
+progress.bcdef::-moz-progress-bar {
+    background: url("../playinfo/graph_bcdef.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.bcdef_fc::-moz-progress-bar {
+    background: url("../playinfo/graph_bcdef_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Chrome */
+progress.bcdef::-webkit-progress-value {
+    background: url("../playinfo/graph_bcdef.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.bcdef_fc::-webkit-progress-value {
+    background: url("../playinfo/graph_bcdef_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Polyfill */
+progress.bcdef[aria-valuenow]:before {
+    background: url("../playinfo/graph_bcdef.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.bcdef_fc[aria-valuenow]:before {
+    background: url("../playinfo/graph_bcdef_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* }}} */
+/* {{{ A */
+/* Firefox */
+progress.a::-moz-progress-bar {
+    background: url("../playinfo/graph_a.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.a_fc::-moz-progress-bar {
+    background: url("../playinfo/graph_a_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Chrome */
+progress.a::-webkit-progress-value {
+    background: url("../playinfo/graph_a.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.a_fc::-webkit-progress-value {
+    background: url("../playinfo/graph_a_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Polyfill */
+progress.a[aria-valuenow]:before {
+    background: url("../playinfo/graph_a.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.a_fc[aria-valuenow]:before {
+    background: url("../playinfo/graph_a_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* }}} */
+/* {{{ AA */
+/* Firefox */
+progress.aa::-moz-progress-bar {
+    background: url("../playinfo/graph_aa.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.aa_fc::-moz-progress-bar {
+    background: url("../playinfo/graph_aa_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Chrome */
+progress.aa::-webkit-progress-value {
+    background: url("../playinfo/graph_aa.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.aa_fc::-webkit-progress-value {
+    background: url("../playinfo/graph_aa_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Polyfill */
+progress.aa[aria-valuenow]:before {
+    background: url("../playinfo/graph_aa.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.aa_fc[aria-valuenow]:before {
+    background: url("../playinfo/graph_aa_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* }}} */
+/* {{{ AAA/Max */
+/* Firefox */
+progress.aaa::-moz-progress-bar {
+    background: url("../playinfo/graph_aaa.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.aaa_fc::-moz-progress-bar {
+    background: url("../playinfo/graph_aaa_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Chrome */
+progress.aaa::-webkit-progress-value {
+    background: url("../playinfo/graph_aaa.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.aaa_fc::-webkit-progress-value {
+    background: url("../playinfo/graph_aaa_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* Polyfill */
+progress.aaa[aria-valuenow]:before {
+    background: url("../playinfo/graph_aaa.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+progress.aaa_fc[aria-valuenow]:before {
+    background: url("../playinfo/graph_aaa_fc.png");
+    background-size: 297px 42px;
+    /* background-size: 251px 27px; */
+}
+/* }}} */
+/* }}} */
+ 
+/* }}} */
+/* {{{ Gauge progress bar styling */
+/* {{{ Basic styling */
+/* All HTML5 progress enabled browsers */
+progress.gaugebar {
+    /* Turns off styling - not usually needed, but good to know. */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background-size: auto;
+    /* Dimensions */
+    width: 302px;
+    height: 23px;
+}
+/* Polyfill */
+progress.gaugebar[role]:after {
+    background-image: none;
+}
+progress[role] strong {
+    display: none;
+}
+/* }}} */
+/* {{{ Empty background */
+/*
+ * Background of the progress bar background
+ */
+/* Firefox and Polyfill */ /* !important only needed in polyfill */
+/* }}} */
+/* {{{ Normal */
+/* {{{ Empty */
+progress.normal {
+    background: url("../playinfo/playm_gauge_normal_empty.png") !important; /* !important only needed in polyfill */
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.normal::-webkit-progress-bar {
+    background: url("../playinfo/playm_gauge_normal_empty.png");
+    background-size: 302px 23px;
+}
+/* }}} */
+/* {{{ Filled */
+/* Firefox */
+progress.normal::-moz-progress-bar {
+    background: url("../playinfo/playm_gauge_normal_full.png");
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.normal::-webkit-progress-value {
+    background: url("../playinfo/playm_gauge_normal_full.png");
+    background-size: 302px 23px;
+}
+/* Polyfill */
+progress.normal[aria-valuenow]:before {
+    background: url("../playinfo/playm_gauge_normal_full.png");
+    background-size: 302px 23px;
+}
+/* }}} */
+/* }}} */
+/* {{{ Assisted easy */
+/* {{{ Empty */
+progress.aeasy {
+    background: url("../playinfo/playm_gauge_aeasy_empty.png") !important; /* !important only needed in polyfill */
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.aeasy::-webkit-progress-bar {
+    background: url("../playinfo/playm_gauge_aeasy_empty.png");
+    background-size: 302px 23px;
+}
+/* }}} */
+/* {{{ Filled */
+/* Firefox */
+progress.aeasy::-moz-progress-bar {
+    background: url("../playinfo/playm_gauge_aeasy_full.png");
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.aeasy::-webkit-progress-value {
+    background: url("../playinfo/playm_gauge_aeasy_full.png");
+    background-size: 302px 23px;
+}
+/* Polyfill */
+progress.aeasy[aria-valuenow]:before {
+    background: url("../playinfo/playm_gauge_aeasy_full.png");
+    background-size: 302px 23px;
+}
+/* }}} */
+/* }}} */
+/* {{{ Hard */
+/* {{{ Empty */
+progress.hard {
+    background: url("../playinfo/playm_gauge_hard_empty.png") !important; /* !important only needed in polyfill */
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.hard::-webkit-progress-bar {
+    background: url("../playinfo/playm_gauge_hard_empty.png");
+    background-size: 302px 23px;
+}
+/* }}} */
+/* {{{ Filled */
+/* Firefox */
+progress.hard::-moz-progress-bar {
+    background: url("../playinfo/playm_gauge_hard_full.png");
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.hard::-webkit-progress-value {
+    background: url("../playinfo/playm_gauge_hard_full.png");
+    background-size: 302px 23px;
+}
+/* Polyfill */
+progress.hard[aria-valuenow]:before {
+    background: url("../playinfo/playm_gauge_hard_full.png");
+    background-size: 302px 23px;
+}
+/* }}} */
+/* }}} */
+/* {{{ EX Hard */
+/* {{{ Empty */
+progress.exhard {
+    background: url("../playinfo/playm_gauge_exhard_empty.png") !important; /* !important only needed in polyfill */
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.exhard::-webkit-progress-bar {
+    background: url("../playinfo/playm_gauge_exhard_empty.png") !important; /* !important only needed in polyfill */
+    background-size: 302px 23px;
+}
+/* }}} */
+/* {{{ Filled */
+/* Firefox */
+progress.exhard::-moz-progress-bar {
+    background: url("../playinfo/playm_gauge_exhard_full.png");
+    background-size: 302px 23px;
+}
+/* Chrome */
+progress.exhard::-webkit-progress-value {
+    background: url("../playinfo/playm_gauge_exhard_full.png");
+    background-size: 302px 23px;
+}
+/* Polyfill */
+progress.exhard[aria-valuenow]:before {
+    background: url("../playinfo/playm_gauge_exhard_full.png");
+    background-size: 302px 23px;
+}
+/* }}} */
+/* }}} */
+ 
+/* }}} */

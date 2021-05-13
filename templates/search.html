@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>Search</title>
+    </head>
+    <body>
+        {% include "header.html" %}
+        <div id="body">
+            <h1>Search page</h1>
+            <form method="POST" action="/search" enctype="multipart/form-data">
+                <p/>
+                <label for="mode">Mode</label><br/>
+                <select id="mode" name="mode">
+                    <option value="NA" {% if 'NA' == formhist.mode %} selected {% endif %}>--</option>
+                    <option value="SP" {% if 'SP' == formhist.mode %} selected {% endif %}>SP</option>
+                    <option value="DP" {% if 'DP' == formhist.mode %} selected {% endif %}>DP</option>
+                </select>
+                <p/>
+                <label for="nameSearch">Song name</label><br/>
+                <input type="text" name="songname" id="nameSearch" value="{{formhist.name}}"><br/>
+                <p/>
+                <label for="grade">Best DJ Level</label><br/>
+                <select id="grade" name="grade">
+                    <option value="NA" {% if 'NA' == formhist.grade %} selected {% endif %}>--</option>
+                    <option value="A" {% if 'A' == formhist.grade %} selected {% endif %}>A</option>
+                    <option value="AA" {% if 'AA' == formhist.grade %} selected {% endif %}>AA</option>
+                    <option value="AAA" {% if 'AAA' == formhist.grade %} selected {% endif %}>AAA</option>
+                    <option value="MAX" {% if 'MAX' == formhist.grade %} selected {% endif %}>MAX</option>
+                </select>
+                <p/>
+                <label for="lamp">Best clear lamp</label><br/>
+                <select id="lamp" name="lamp">
+                    <option value="NA" {% if 'NA' == formhist.lamp %} selected {% endif %}>--</option>
+                    <option value="F" {% if 'F' == formhist.lamp %} selected {% endif %}>F</option>
+                    <option value="AC" {% if 'AC' == formhist.lamp %} selected {% endif %}>AC</option>
+                    <option value="EC" {% if 'EC' == formhist.lamp %} selected {% endif %}>EC</option>
+                    <option value="NC" {% if 'NC' == formhist.lamp %} selected {% endif %}>NC</option>
+                    <option value="HC" {% if 'HC' == formhist.lamp %} selected {% endif %}>HC</option>
+                    <option value="EX" {% if 'EX' == formhist.lamp %} selected {% endif %}>EX</option>
+                    <option value="FC" {% if 'FC' == formhist.lamp %} selected {% endif %}>FC</option>
+                </select>
+                <p/>
+                <label for="unlocked">Unlock state</label><br/>
+                <select id="unlocked" name="unlocked">
+                    <option value="both" {% if 'both' == formhist.unlocked %} selected {% endif %}>Both</option>
+                    <option value="yes" {% if 'yes' == formhist.unlocked %} selected {% endif %}>Unlocked</option>
+                    <option value="no" {% if 'no' == formhist.unlocked %} selected {% endif %}>Locked</option>
+                </select>
+                <p/>
+                <label for="sort">Sort by</label><br/>
+                <select id="sort" name="sort">
+                    <option value="NA" {% if 'NA' == formhist.sort %} selected {% endif %}>--</option>
+                    <option value="title" {% if 'title' == formhist.sort %} selected {% endif %}>Title</option>
+                    <option value="title2" {% if 'title2' == formhist.sort %} selected {% endif %}>Marquee title</option>
+                    <option value="iidx_id" {% if 'iidx_id' == formhist.sort %} selected {% endif %}>Song ID</option>
+                    <option value="level" {% if 'level' == formhist.sort %} selected {% endif %}>Level</option>
+                    <option value="date" {% if 'date' == formhist.sort %} selected {% endif %}>Date</option>
+                </select>
+                <select id="sortorder" name="sortorder">
+                    <option value="asc" {% if 'asc' == formhist.sortorder %} selected {% endif %}>Ascending</option>
+                    <option value="desc" {% if 'desc' == formhist.sortorder %} selected {% endif %}>Descending</option>
+                </select>
+                <input type="submit">
+            </form>
+            <table>
+                <tr>
+                    <th>Song</th>
+                    <th>Difficulty</th>
+                    <th>Level</th>
+                    <th>Last Played</th>
+                </tr>
+                {% for item in data %}
+                <tr>
+                    <td><a href="/songs?songid={{item.songid}}">{{ item.title }}</a></td>
+                    <td><a href="/songs?songid={{item.songid}}">{{item.diff}}</a></td>
+                    <td><a href="/songs?songid={{item.songid}}">{{item.level}}</a></td>
+                    <td><a href="/songs?songid={{item.songid}}">{{item.playdate}}</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% include "footer.html" %}
+    </body>
+</html>
