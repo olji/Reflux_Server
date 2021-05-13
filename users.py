@@ -20,10 +20,8 @@ def user():
         #name = "DJ " + name
 
 
-    name = "DJ OLJI"
-    name = name.upper()
-    uid = Users.select(Users.userID).where(Users.djname == name).get()
+    user = Users.select().limit(1).get()
 
     plays = Plays.select(Songs.title, Songs.iidx_id, Charts.difficulty, Plays.grade, Plays.lamp, Plays.ex_score).join(Charts).join(Songs, on=(Songs.songID == Charts.song)).order_by(Plays.date.desc()).limit(10).dicts()
 
-    return render_template('userdata.html', name=name, plays=plays)
+    return render_template('userdata.html', name=user.djname, plays=plays)
