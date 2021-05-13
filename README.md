@@ -3,4 +3,7 @@ Server side for remote saving through [Reflux](https://github.com/olji/Reflux)
 
 Have some livestreaming and statistics utilities.
 
-Just deploy on a server / local machine, run setup.sh to set up a user if you don't want to do it manually, and add the api key to Reflux's config.ini
+# Deployment
+First, run setup.sh to generate a database from the schema file and insert a user. You can do this manually as well if you don't trush shell scripts.
+
+After that you deploy it however works best, either running wsgi.py using python directly or using whatever server solution you like.
