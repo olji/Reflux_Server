@@ -13,48 +13,31 @@ def upload_file():
         user = Users.select().where(Users.apikey == request.form['apikey']).get()
         for x in file.readlines():
             x = str(x, "utf-8")
-            pieces = x.strip().split('\t')
+            pieces = x.strip().split(',')
+            if(len(pieces) != 6):
+                return render_template("import_results.html", result=["File format is wrong"])
+            if(pieces[1] == "SPB" or pieces[1] == "DPB"):
+                continue
+            song = Songs.select().where(Songs.iidx_id == pieces[0]).get()
             try:
-                song = Songs.select().where(fn.Lower(Songs.title) == fn.Lower(pieces[0])).get()
-                col_len = len(pieces)
-                only_grade = False
-                only_lamp = False
-                if col_len < 4:
-                    return render_template("import_results.html", result=["Missing both lamp and grade columns"])
-                if col_len == 4:
-                    if is_grade(pieces[3]):
-                        only_grade = True
-                    else:
-                        only_lamp = True
                 chart = Charts.select().where(Charts.difficulty == pieces[1], Charts.song == song.songID).get()
-                try:
-                    play = ChartStats.select().where(ChartStats.chart == chart.chartID, ChartStats.user).get()
-                except:
-                    play = ChartStats.create()
-                    play.chart = chart.chartID
-                    try:
-                        play.user = user.userID
-                    except Exception as e:
-                        print("We're having issues in here: " + str(e))
-                play.imported = True
-                play.playtype = pieces[2]
-                if only_grade:
-                    play.grade = pieces[3]
-                elif only_lamp:
-                    play.lamp = pieces[3]
-                else:
-                    play.lamp = pieces[3]
-                    play.grade = pieces[4]
-                play.save()
-
-            except Exception as e:
-                print(pieces)
+            except:
                 if 'status' not in failedsongs:
-                    failedsongs['status'] = "Following songs failed upload, check spacing. Check title output here with songlist dump from client software";
+                    failedsongs['status'] = "The following songs failed due to missing charts";
                     failedsongs['title'] = []
                 failedsongs['title'].append(pieces[0])
-        if 'status' not in failedsongs:
-            failedsongs['status'] = "All songs were added without error"
+
+            try:
+                play = ChartStats.select().where(ChartStats.chart == chart.chartID, ChartStats.user).get()
+            except:
+                playtype = pieces[1][0:1]
+                play = ChartStats.create(chart = chart.chartID, user = user.userID, playtype = playtype)
+            play.imported = True
+            play.grade = pieces[2]
+            play.lamp = pieces[3]
+            play.ex_score = pieces[4]
+            play.miss = pieces[5]
+            play.save()
 
         return render_template("import_results.html", result=failedsongs)
 

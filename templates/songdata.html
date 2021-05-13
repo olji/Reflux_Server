@@ -24,11 +24,11 @@
                 {% for item in plays %}
                 <tr>
                     <td>{{ item.name }}</td>
-		    <td>{{item.diff}}</td>
-		    <td><div><div class='{{item.lampclass}}' style="background: url('static/playinfo/penel_lamp_{{item.lamp}}.png'"></div><progress class="djlevelbar {{item.divclass}}" max="297" value="{{item.fillpercentage}}"></progress><img src="static/playinfo/penel_end.png" class="djlevelbar" ></td>
-            <td>{{ item.exscore }}</td>
-            </tr>
-{% endfor %}
+                    <td>{{item.diff}}</td>
+                    <td><div class='{{item.lampclass}}' style="background: url('static/playinfo/penel_lamp_{{item.lamp}}.png'"></div><progress class="djlevelbar {{item.divclass}}" max="297" value="{{item.fillpercentage}}"></progress><img src="static/playinfo/penel_end.png" class="djlevelbar" ></td>
+                    <td>{{ item.exscore }}</td>
+                </tr>
+                {% endfor %}
             </table>
         </div>
 	<p/>

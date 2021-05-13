@@ -323,9 +323,11 @@ def update_chart():
     if validate_apikey(apikey) == False:
         return "Invalid api key", 400
     chart = request.form
+
     chartcount = Charts.select(fn.count(Charts.difficulty)).join(Songs).where(Songs.iidx_id == chart['songid'].strip(), Charts.difficulty == chart['diff'].strip()).scalar()
     if chartcount == 0:
         add_chart(request.form)
+
     else:
         c = Charts.select().join(Songs).where(Songs.iidx_id == chart['songid'].strip(), Charts.difficulty == chart['diff'].strip()).get()
         c.difficulty = chart['diff'].strip()

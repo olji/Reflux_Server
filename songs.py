@@ -4,7 +4,6 @@ from models import *
 
 @app.route("/songs", methods=['GET'])
 def song():
-    print("inside song()")
     diff = None
     if 'songid' in request.args:
         songid = str(request.args['songid'])
@@ -16,7 +15,6 @@ def song():
     song = Songs.select().where(Songs.iidx_id == songid).get()
     songdata = {'genre':song.genre, 'title':song.title, 'title2':song.title2, 'artist':song.artist, 'bpm':song.bpm}
 
-    print(diff)
     if diff is None:
         plays = ChartStats.select().join(Charts).join(Users, on=(ChartStats.user == Users.userID)).join(Songs, on=(Songs.songID == Charts.song)).where(Songs.iidx_id == songid)
     else:
