@@ -76,6 +76,7 @@ def regrade_plays():
 
         print("Setting play " + str(play.playID) + " grade to " + newgrade)
         play.grade = newgrade
+        play.percent_max = ex / maxEx
         play.save()
     return "All plays have been regraded", 200
 
