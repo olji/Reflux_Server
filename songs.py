@@ -44,7 +44,7 @@ def song():
         elif grade == "AAA" or grade == "MAX":
             grade_divclass = "aaa"
 
-        if lamp=="FC", or lamp=="PFC":
+        if lamp=="FC" or lamp=="PFC":
             grade_divclass += "_fc"
 
         percentage = (exscore / (notecount*2)) * 297
