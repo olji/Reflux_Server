@@ -73,7 +73,7 @@ def play_page():
         lamp = "HARD CLEAR"
     elif lamp=="EX":
         lamp = "EX HARD CLEAR"
-    elif lamp=="FC":
+    elif lamp=="FC" or lamp == "PFC":
         lamp = "FULL COMBO"
         grade_divclass += "_fc"
 

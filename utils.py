@@ -51,6 +51,8 @@ def is_grade(val):
 def regrade_plays():
     data = ChartStats.select().join(Charts)
     for play in data:
+        if play.grade == "NP":
+            continue
         notecount = play.chart.notecount
         ex = play.ex_score
 

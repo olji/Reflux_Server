@@ -19,11 +19,11 @@ def notify_play():
     elif play.grade == "AAA" or play.grade == "MAX":
         grade_divclass = "aaa"
 
-    if play.lamp=="FC":
+    if play.lamp=="FC" or play.lamp=="PFC":
         grade_divclass += "_fc"
 
     lampclass = "static"
-    if(play.lamp == "F" or play.lamp == "EX" or play.lamp == "FC"):
+    if(play.lamp == "F" or play.lamp == "EX" or play.lamp == "FC" or play.lamp == "PFC"):
         lampclass = "anim_"+play.lamp
 
 

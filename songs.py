@@ -44,13 +44,13 @@ def song():
         elif grade == "AAA" or grade == "MAX":
             grade_divclass = "aaa"
 
-        if lamp=="FC":
+        if lamp=="FC", or lamp=="PFC":
             grade_divclass += "_fc"
 
         percentage = (exscore / (notecount*2)) * 297
 
         lampclass = "static"
-        if(play.lamp == "F" or play.lamp == "EX" or play.lamp == "FC"):
+        if(play.lamp == "F" or play.lamp == "EX" or play.lamp == "FC" or play.lamp == "PFC"):
             lampclass = "anim_"+play.lamp
 
         entries.append({'name':name, 'playid':playid, 'diff':diff, 'grade':grade, 'lamp':lamp.lower(), 'exscore':exscore, 'lampclass':lampclass, 'fillpercentage':percentage, 'divclass':grade_divclass})

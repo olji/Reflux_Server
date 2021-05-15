@@ -70,8 +70,8 @@ def song_add_entry():
         return "Level is not a number", 400
     if request.form['grade'].upper() not in ['F','E','D','C','B','A','AA','AAA']:
         return "Grade malformed (Accepted grades: [F,E,D,C,B,A,AA,AAA])", 400
-    if request.form['lamp'].upper() not in ['NP', 'F', 'AC', 'EC', 'NC', 'HC', 'EX', 'FC']:
-        return "Lamp malformed (Accepted lamps: [NP, F, AC, EC NC, HC, EX, FC])", 400
+    if request.form['lamp'].upper() not in ['NP', 'F', 'AC', 'EC', 'NC', 'HC', 'EX', 'FC', 'PFC']:
+        return "Lamp malformed (Accepted lamps: [NP, F, AC, EC NC, HC, EX, FC, PFC])", 400
     if request.form['diff'].upper() not in ['SPB', 'SPN', 'SPH', 'SPA', 'SPL', 'DPB', 'DPN', 'DPH', 'DPA', 'DPL']:
         return "Difficulty malformed (Accepted difficulties: [SPB, SPN, SPH, SPA, SPL, DPB, DPN, DPH, DPA, DPL])", 400
     if int(request.form['level']) > 12 or int(request.form['level']) < 1:
@@ -100,7 +100,7 @@ def song_add_entry():
     exscore = int(request.form['exscore'])
     grade = request.form['grade']
     lamp = request.form['lamp']
-    playtype = request.form['playtype']
+    playtype = "DP" if "DP" in request.form['playtype'] else "SP"
     gaugetype = request.form['gauge']
 
     # Clear metadata
@@ -342,10 +342,12 @@ def add_chart(chart):
     chartcount = Charts.select(fn.count(Charts.difficulty)).join(Songs).where(Songs.iidx_id == chart['songid'].strip(), Charts.difficulty == chart['diff'].strip()).scalar()
     if chartcount == 0:
         song = Songs.select().where(Songs.iidx_id == chart['songid']).get()
-        c = Charts.create(song_id = song.songID, difficulty = chart['diff'].strip(), level = int(chart['level'].strip()), notecount = int(chart['notecount'].strip()), unlocked = bool(chart['unlocked'].strip()))
+        c = Charts.create(song_id = song.songID, difficulty = chart['diff'].strip(), level = int(chart['level'].strip()), notecount = int(chart['notecount'].strip()))
+        b = 1 if chart['unlocked'] == "True" else 0
+        c.unlocked = b
         c.save()
 
-        playtype = "P1" if "SP" in chart['diff'] else "DP"
+        playtype = "SP" if "SP" in chart['diff'] else "DP"
         cs = ChartStats.create(chart_id = c.chartID, user_id = 1, playtype = playtype)
         cs.grade = "NP"
         cs.lamp = "NP"
@@ -356,6 +358,25 @@ def add_chart(chart):
         cs.hc_gauge = 0
         cs.ex_gauge = 0
         cs.percent_max = 0
+        cs.save()
+
+
+@app.route("/api/postscore", methods=['POST'])
+def post_score():
+    apikey = request.form['apikey']
+    if validate_apikey(apikey) == False:
+        return "Invalid api key", 400
+    form = request.form
+    chart = Charts.select().join(Songs).where(Songs.iidx_id == form['songid'].strip(), Charts.difficulty == form['diff'].strip()).get()
+    cs = ChartStats.select().where(ChartStats.chart_id == chart.chartID, ChartStats.user_id == 1).get()
+    cs.ex_score = int(form['exscore'])
+    cs.miss = int(form['misscount'])
+    cs.grade = form['grade']
+    cs.lamp = form['lamp']
+    cs.percent_max = cs.ex_score / (chart.notecount * 2)
+    cs.save()
+    return "Chart scores updated successfully", 200
+
 # }}}
 
 # {{{ Utility functions
@@ -373,7 +394,7 @@ def update_entries():
 def genstats():
     for chart in Charts.select().join(ChartStats, JOIN.LEFT_OUTER).where(ChartStats.playID == None):
         if "SP" in chart.difficulty:
-            playtype = "P1"
+            playtype = "SP"
         elif "DP" in chart.difficulty:
             playtype = "DP"
         cs = ChartStats.create(chart_id = chart.chartID, user_id = 1, playtype = playtype)
@@ -441,7 +462,7 @@ def grade_max(lhs, rhs):
             return grade
     return ""
 def lamp_max(lhs, rhs):
-    lamporder = ["FC", "EX", "HC", "NC", "AC", "EC", "F", "NP", ""]
+    lamporder = ["PFC", "FC", "EX", "HC", "NC", "AC", "EC", "F", "NP", ""]
     for lamp in lamporder:
         if lhs == lamp or rhs == lamp:
             return lamp
