@@ -1,7 +1,7 @@
 body{
     color: #eee;
     text-align: center;
-    font: Verdana;
+    font-family: Verdana, sans-serif;
     /* font-size: 30px; */
     vertical-align:middle;
 }
