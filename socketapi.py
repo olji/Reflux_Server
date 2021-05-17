@@ -22,17 +22,20 @@ def notify_play():
     if play.lamp=="FC" or play.lamp=="PFC":
         grade_divclass += "_fc"
 
-    lampclass = "static"
-    if(play.lamp == "F" or play.lamp == "EX" or play.lamp == "FC" or play.lamp == "PFC"):
-        lampclass = "anim_"+play.lamp
+    lamp = play.lamp
+    if(lamp == "PFC"):
+        lamp = "FC"
 
+    lampclass = "static"
+    if(lamp == "F" or lamp == "EX" or lamp == "FC" or lamp == "PFC"):
+        lampclass = "anim_"+lamp
 
     percentage = (play.ex_score / (play.chart.notecount*2)) * 297
     title = play.chart.song.title + " " + play.chart.difficulty
 
     fontsize = 30
 
-    socket.emit("newplay", {'title':title, 'defaultFontSize':fontsize, 'lampclass':lampclass, 'divclass':grade_divclass, 'lamp':play.lamp.lower(), 'fillpercentage':percentage}, broadcast=True)
+    socket.emit("newplay", {'title':title, 'defaultFontSize':fontsize, 'lampclass':lampclass, 'divclass':grade_divclass, 'lamp':lamp.lower(), 'fillpercentage':percentage}, broadcast=True)
 
 @socket.on('message')
 def handle_message(data):
