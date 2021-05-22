@@ -1,9 +1,10 @@
 body{
     color: #eee;
     text-align: center;
-    font-family: Verdana, sans-serif;
+    font-family: Impact, sans-serif;
     /* font-size: 30px; */
     vertical-align:middle;
+    white-space: nowrap;
 }
 img{
     vertical-align:middle;

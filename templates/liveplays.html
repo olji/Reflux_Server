@@ -2,6 +2,7 @@
 <html>
     <head>
         <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+        <script src="/static/jquery-3.5.1.min.js"></script>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style_alert.css') }}">
         <script type="text/javascript" charset="utf-8">
             function snipEntries(){
@@ -9,7 +10,8 @@
                 var nodes = document.querySelectorAll('.playentry');
                 var totalHeight = 0;
                 nodes.forEach(node => { totalHeight += node.offsetHeight;});
-                if(totalHeight > document.documentElement.clientHeight){
+                while(totalHeight > document.documentElement.clientHeight - 20){
+                    totalHeight -= body.lastChild.offsetHeight;
                     body.lastChild.remove();
                 }
             }
@@ -22,11 +24,12 @@
                 return width;
             }
             const getFontSize = (text, pxSize) => {
-                var width = getTextWidth(text, pxSize+"px verdana");
+                font = $('body').css('font-family');
+                var width = getTextWidth(text, pxSize+"px "+font);
                 formattedWidth = Math.ceil(width) + "px";
-                while(width > document.documentElement.clientWidth){
+                while(width > document.documentElement.clientWidth - 75){
                     pxSize--;
-                    width = getTextWidth(text, pxSize+"px verdana");
+                    width = getTextWidth(text, pxSize+"px "+font);
                 }
                       return `${pxSize}px`
                 }
