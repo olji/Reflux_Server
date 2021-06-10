@@ -22,9 +22,9 @@ def home():
     unlocked = Charts.select(fn.Count()).where(Charts.unlocked == True).scalar()
     total_sp = Charts.select(fn.Count()).where(Charts.difficulty % "SP*").scalar()
     total_dp = Charts.select(fn.Count()).where(Charts.difficulty % "DP*").scalar()
-    hidden_sp = Charts.select(fn.Count()).join(Songs).where(Charts.unlocked == False, Charts.difficulty % "SP*", Songs.unlocktype == "Hidden").scalar()
-    hidden_dp = Charts.select(fn.Count()).join(Songs).where(Charts.unlocked == False, Charts.difficulty % "DP*", Songs.unlocktype == "Hidden").scalar()
-    hidden = Charts.select(fn.Count()).join(Songs).where(Charts.unlocked == False, Songs.unlocktype == "Hidden").scalar()
+    hidden_sp = Charts.select(fn.Count()).join(Songs).where(Charts.unlocked == False, Charts.difficulty % "SP*", Songs.unlocktype == "Sub").scalar()
+    hidden_dp = Charts.select(fn.Count()).join(Songs).where(Charts.unlocked == False, Charts.difficulty % "DP*", Songs.unlocktype == "Sub").scalar()
+    hidden = Charts.select(fn.Count()).join(Songs).where(Charts.unlocked == False, Songs.unlocktype == "Sub").scalar()
     bit_cost = 0;
     for chart in Charts.select().join(Songs).where(Charts.unlocked == False, Songs.unlocktype == "Bits"):
         bit_cost += chart.level * 500
