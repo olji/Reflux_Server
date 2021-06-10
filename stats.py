@@ -41,7 +41,7 @@ def show_stats():
         lampinfo[play['level']][play['lamp']] = play['lamp")']
         lamppercent[play['lamp']] += play['lamp")']
         if(play['lamp'] != "NP"):
-            totalLampPerLevel_op[play['level']] = totalLampPerLevel[play['level']] + play['lamp")']
+            totalLampPerLevel_op[play['level']] = totalLampPerLevel_op[play['level']] + play['lamp")']
         totalLampPerLevel[play['level']] = totalLampPerLevel[play['level']] + play['lamp")']
         nLamps += play['lamp")']
     for play in ChartStats.select(Charts.level, ChartStats.grade, fn.Count(ChartStats.grade)).join(Charts).group_by(ChartStats.grade, Charts.level).where(ChartStats.user==user.userID, ChartStats.playtype == playtype).dicts():
