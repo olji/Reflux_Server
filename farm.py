@@ -12,12 +12,10 @@ def farm():
         target = str(request.args['args'])
     if farmType == "grade":
         data = GetSongsForTargetGrade(target)
-    elif farmType == "import":
-        data = GetImportedPlays()
     elif farmType == "old":
         data = GetOldPlays()
 
-    farmtypes = ["grade", "import", "old"]
+    farmtypes = ["grade", "old"]
     args = {'grade':["A", "AA", "AAA", "MAX"], 'import':[], 'old':["span"], 'generic':["limit", "unique"]}
 
     rows = {'data':data, 'count':len(data), 'mode':target}
@@ -27,12 +25,6 @@ def farm():
 def GetOldPlays():
     data = []
     for play in ChartStats.select().join(Charts).join(Songs).group_by(Songs.iidx_id).order_by(ChartStats.lastplayed).limit(200):
-        data.append({'title':play.chart.song.title, 'level':play.chart.level, 'songid':play.chart.song.iidx_id, 'diff':play.chart.difficulty, 'current':"", 'criteria_label':"", 'criteria': ""})
-    data = sorted(data, key=lambda x: x['level'])
-    return data
-def GetImportedPlays():
-    data = []
-    for play in ChartStats.select().join(Charts).join(Songs).where(ChartStats.imported == True):
         data.append({'title':play.chart.song.title, 'level':play.chart.level, 'songid':play.chart.song.iidx_id, 'diff':play.chart.difficulty, 'current':"", 'criteria_label':"", 'criteria': ""})
     data = sorted(data, key=lambda x: x['level'])
     return data
