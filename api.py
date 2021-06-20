@@ -462,7 +462,7 @@ def grade_max(lhs, rhs):
             return grade
     return ""
 def lamp_max(lhs, rhs):
-    lamporder = ["PFC", "FC", "EX", "HC", "NC", "AC", "EC", "F", "NP", ""]
+    lamporder = ["PFC", "FC", "EX", "HC", "NC", "EC", "AC", "F", "NP", ""]
     for lamp in lamporder:
         if lhs == lamp or rhs == lamp:
             return lamp
