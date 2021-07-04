@@ -7,39 +7,39 @@
         <script src="static/scripts/usercharts.js"></script>
         <script>
             $(document).ready(function() {
-		    drawStats( {{ lamppercent|safe }} , {{ gradepercent|safe }}, {{ levellamppercent|safe }} , {{ levelgradepercent|safe }} , {{ levellamppercent_onlyplayed|safe }} , {{ levelgradepercent_onlyplayed|safe }} );
+		    drawStats( {{ lamppercent|safe }} , {{ gradepercent|safe }}, {{ levellamppercent|safe }} , {{ levelgradepercent|safe }} , {{ levellamppercent_onlyunlocked|safe }} , {{ levelgradepercent_onlyunlocked|safe }} );
             });
         </script>
     </head>
     <body>
         {% include "header.html" %}
         <div id="body">
-            <h2>Percentage</h2>
+            <h2>Percentage (Excluding locked)</h2>
             <div class="chart-container" style="margin: 0 ; display:inline-block">
-                <canvas id="lvlgrades_percent" width="400px" height="300px"></canvas>
+                <canvas id="lvlgrades_percent_onlyunlocked" width="400px" height="400px"></canvas>
             </div>
             <div class="chart-container" style="margin: 0 auto; display:inline-block">
-                <canvas id="lvlclears_percent" width="400px" height="300px"></canvas>
+                <canvas id="lvlclears_percent_onlyunlocked" width="400px" height="400px"></canvas>
             </div>
             <div class="chart-container" style="margin: 0 ; display:inline-block">
-                <canvas id="grades" width="400px" height="300px"></canvas>
+                <canvas id="grades_onlyunlocked" width="400px" height="400px"></canvas>
             </div>
             <div class="chart-container" style="margin: 0 auto; display:inline-block">
-                <canvas id="clears" width="400px" height="300px"></canvas>
+                <canvas id="clears_onlyunlocked" width="400px" height="400px"></canvas>
             </div>
 	    <p/>
-            <h2>Percentage (Excluding unplayed)</h2>
+            <h2>Percentage (All charts)</h2>
             <div class="chart-container" style="margin: 0 ; display:inline-block">
-                <canvas id="lvlgrades_percent_onlyplayed" width="400px" height="300px"></canvas>
+                <canvas id="lvlgrades_percent" width="400px" height="400px"></canvas>
             </div>
             <div class="chart-container" style="margin: 0 auto; display:inline-block">
-                <canvas id="lvlclears_percent_onlyplayed" width="400px" height="300px"></canvas>
+                <canvas id="lvlclears_percent" width="400px" height="400px"></canvas>
             </div>
             <div class="chart-container" style="margin: 0 ; display:inline-block">
-                <canvas id="grades_onlyplayed" width="400px" height="300px"></canvas>
+                <canvas id="grades" width="400px" height="400px"></canvas>
             </div>
             <div class="chart-container" style="margin: 0 auto; display:inline-block">
-                <canvas id="clears_onlyplayed" width="400px" height="300px"></canvas>
+                <canvas id="clears" width="400px" height="400px"></canvas>
             </div>
         </div>
         {% include "footer.html" %}
