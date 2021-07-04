@@ -14,7 +14,7 @@ def searchpage():
             mode = str(request.form.get('mode'))
             formhist['mode']=mode
             if(mode == "SP"):
-                query = query.where((ChartStats.playtype == "P1") | (ChartStats.playtype == "P2"))
+                query = query.where(ChartStats.playtype == "SP")
             else:
                 query = query.where(ChartStats.playtype == mode)
         if request.form.get('songname') != "":
