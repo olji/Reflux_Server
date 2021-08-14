@@ -8,7 +8,7 @@ def notify_play():
     play = Plays.select().join(Charts).join(Songs).order_by(Plays.date.desc()).limit(1).get()
 
     # For testing
-    play = Plays.select().join(Charts).join(Songs).order_by(fn.Random()).limit(1).get()
+    #play = Plays.select().join(Charts).join(Songs).order_by(fn.Random()).limit(1).get()
 
     grade_divclass = "bcdef"
 
